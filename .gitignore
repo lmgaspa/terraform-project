@@ -35,3 +35,6 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+myenv/
+myenv/lib/python3.12/site-packages/yaml/*.py
