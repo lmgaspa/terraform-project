@@ -19,9 +19,4 @@ resource "helm_release" "eks_helm_controller" {
     name  = "serviceAccount.name"
     value = "aws-load-balancer-controller"
   }
-
-  set {
-  name  = "vpcId"
-  value = "vpc-039b0296acb1b21d0"
-}
 }

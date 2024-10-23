@@ -1,6 +1,5 @@
 resource "aws_eip" "eks_ngw_eip_1a" {
-  domain = "vpc"
-
+  vpc = true
   tags = merge(
     var.tags,
     {
@@ -10,8 +9,7 @@ resource "aws_eip" "eks_ngw_eip_1a" {
 }
 
 resource "aws_eip" "eks_ngw_eip_1b" {
-  domain = "vpc"
-
+  vpc = true
   tags = merge(
     var.tags,
     {
@@ -32,7 +30,6 @@ resource "aws_nat_gateway" "eks_ngw_1a" {
   )
 }
 
-
 resource "aws_nat_gateway" "eks_ngw_1b" {
   allocation_id = aws_eip.eks_ngw_eip_1b.id
   subnet_id     = aws_subnet.eks_subnet_public_1b.id
@@ -49,7 +46,7 @@ resource "aws_route_table" "eks_private_route_table_1a" {
   vpc_id = aws_vpc.eks_vpc.id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.eks_ngw_1a.id
   }
 
@@ -65,7 +62,7 @@ resource "aws_route_table" "eks_private_route_table_1b" {
   vpc_id = aws_vpc.eks_vpc.id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.eks_ngw_1b.id
   }
 
